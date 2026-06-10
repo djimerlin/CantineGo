@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #2D6A4F;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.navbar .logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar .logo span {
+    color: #F4A261;
+}
+
+/* HERO */
+.hero {
+    background: #2D6A4F;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+/* BOUTONS */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-vert   { background: #2D6A4F; color: white; }
+.btn-orange { background: #F4A261; color: white; }
+.btn-rouge  { background: #e63946; color: white; }
+
+/* CARTES MENU */
+.section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titre-section {
+    font-size: 22px;
+    color: #2D6A4F;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.carte {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.carte-header {
+    background: #2D6A4F;
+    color: white;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.carte-body {
+    padding: 15px;
+}
+
+.carte-plat {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.carte-prix {
+    color: #2D6A4F;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* FORMULAIRES */
+.form-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 30px;
+    max-width: 430px;
+    margin: 40px auto;
+}
+
+.form-titre {
+    font-size: 22px;
+    color: #2D6A4F;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-groupe {
+    margin-bottom: 15px;
+}
+
+.form-groupe label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-groupe input,
+.form-groupe select {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-groupe input:focus {
+    outline: none;
+    border-color: #2D6A4F;
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+    display: block;
+    padding: 12px;
+    margin-top: 5px;
+}
+
+/* ALERTES */
+.alerte {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.alerte-ok  { background: #d1fae5; color: #065f46; }
+.alerte-err { background: #fee2e2; color: #991b1b; }
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #999;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+}
