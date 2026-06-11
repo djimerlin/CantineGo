@@ -2,6 +2,21 @@ CREATE DATABASE IF NOT EXISTS cantinego;
 USE cantinego;
 
 
+//nouvel ajout
+ALTER TABLE repas
+    ADD COLUMN image VARCHAR(255) NULL DEFAULT NULL AFTER prix;
+
+ALTER TABLE admin 
+ADD COLUMN cle_unique VARCHAR(50) NOT NULL UNIQUE AFTER id_admin;
+
+INSERT INTO admin (cle_unique, nom, email, mot_de_passe) 
+VALUES (
+  'CG-8942', 
+  'Administrateur Principal', 
+  'admin@cantinego.com', 
+  'admin1'
+);
+//noubel ajout 
 CREATE TABLE eleve (
   id_eleve INT AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(100) NOT NULL,
@@ -25,6 +40,7 @@ CREATE TABLE repas (
   nom VARCHAR(100) NOT NULL,
   prix DECIMAL(5,2) NOT NULL -- Le prix migre ici conformément au schéma
 );
+
 
 
 CREATE TABLE menu (

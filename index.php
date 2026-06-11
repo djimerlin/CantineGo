@@ -2,10 +2,18 @@
 require_once 'includes/db.php';
 require_once 'includes/fonction.php';
 
-// Récupérer les menus de la semaine
+// Récupérer les bornes de la semaine en cours
 $lundi    = date('Y-m-d', strtotime('monday this week'));
 $vendredi = date('Y-m-d', strtotime('friday this week'));
-$stmt = $pdo->prepare("SELECT * FROM menu WHERE date_menu BETWEEN ? AND ? ORDER BY date_menu");
+
+// Jointure SQL pour récupérer les détails du repas associé à chaque menu
+$stmt = $pdo->prepare("
+    SELECT m.*, r.nom AS nom_repas, r.prix, r.image 
+    FROM menu m
+    INNER JOIN repas r ON m.id_repas = r.id_repas
+    WHERE m.date_menu BETWEEN ? AND ? 
+    ORDER BY m.date_menu ASC
+");
 $stmt->execute([$lundi, $vendredi]);
 $menus = $stmt->fetchAll();
 ?>
@@ -19,7 +27,6 @@ $menus = $stmt->fetchAll();
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <span class="logo">Cantine<span>Go</span></span>
   <div>
@@ -27,13 +34,12 @@ $menus = $stmt->fetchAll();
     <?php if (estConnecteEleve()): ?>
       <a href="deconnexion.php">Déconnexion</a>
     <?php else: ?>
-      <a href="connexion.php">Connexion</a>
-      <a href="inscription.php">S'inscrire</a>
+      <a href="connect.php">Connexion</a>
+      <a href="iscrip.php">S'inscrire</a>
     <?php endif; ?>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <h1>🍽️ Menu de la semaine</h1>
   <p>Consultez les repas et réservez votre place à la cantine.</p>
@@ -42,34 +48,50 @@ $menus = $stmt->fetchAll();
   <?php endif; ?>
 </div>
 
-<!-- MENUS -->
 <div class="section">
   <div class="titre-section">📅 Cette semaine</div>
 
   <?php if (empty($menus)): ?>
-    <p style="color:#999">Aucun menu disponible cette semaine.</p>
+    <p style="color:#999; text-align: center; padding: 2rem;">Aucun menu disponible cette semaine.</p>
   <?php else: ?>
     <div class="grille">
-      <?php foreach ($menus as $menu): ?>
-        <div class="carte">
-          <div class="carte-header"><?= formatDate($menu['date_menu']) ?></div>
-          <div class="carte-body">
-            <div class="carte-plat"><?= escape($menu['plat_principal']) ?></div>
-            <div class="carte-prix"><?= formatPrix($menu['prix']) ?></div>
-            <?php if (estConnecteEleve()): ?>
-              <a href="reservation.php?id=<?= $menu['id_menu'] ?>"
-                 class="btn btn-vert btn-full" style="margin-top:10px">
-                Réserver
-              </a>
-            <?php endif; ?>
-          </div>
-        </div>
-      <?php endforeach; ?>
+        <?php foreach ($menus as $menu): ?>
+            <div class="carte">
+                <div class="carte-header">
+                    <?= date('d/m/Y', strtotime($menu['date_menu'])) ?> - <?= htmlspecialchars($menu['plat_principal']) ?>
+                </div>
+                
+                <?php if (!empty($menu['image'])): ?>
+                    <img src="uploads/repas/<?= htmlspecialchars($menu['image']) ?>" alt="<?= htmlspecialchars($menu['nom_repas']) ?>" class="carte-img" style="width:100%; height:150px; object-fit:cover; display:block;">
+                <?php else: ?>
+                    <div class="carte-no-img" style="width:100%; height:150px; background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#ccc;">○</div>
+                <?php endif; ?>
+
+                <div class="carte-body" style="padding: 1rem;">
+                    <div class="carte-plat" style="font-weight:600; font-size:1.1rem; margin-bottom:0.25rem;">
+                        <?= htmlspecialchars($menu['nom_repas']) ?>
+                    </div>
+                    
+                    <div class="carte-prix" style="color:#888884; font-size:0.9rem; font-weight:500;">
+                        <?= number_format($menu['prix'], 0, ',', ' ') ?> FCFA
+                    </div>
+                    
+                    <?php if (estConnecteEleve()): ?>
+                        <a href="reservation.php?id=<?= $menu['id_menu'] ?>"
+                           class="btn btn-vert btn-full" style="margin-top:10px; display:block; text-align:center; text-decoration:none;">
+                            Réserver
+                        </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
   <?php endif; ?>
 </div>
 
-<footer>CantineGo &copy; <?= date('Y') ?> — Projet SIL2</footer>
+<footer style="text-align:center; padding:2rem 1rem; margin-top:3rem; border-top:1px solid #e5e5e3; color:#888884; font-size:0.85rem;">
+  CantineGo &copy; <?= date('Y') ?> — Projet SIL2
+</footer>
 
 </body>
 </html>
