@@ -14,7 +14,7 @@ VALUES (
   'CG-8942', 
   'Administrateur Principal', 
   'admin@cantinego.com', 
-  'admin1'
+  'admin'
 );
 //noubel ajout 
 CREATE TABLE eleve (

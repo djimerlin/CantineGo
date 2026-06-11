@@ -115,7 +115,7 @@ $reservations = $admin->voirReservations();
 
     <div class="sidebar-footer">
         <div class="admin-name"><?php echo htmlspecialchars($_SESSION['admin_nom']); ?></div>
-        <a href="connect.php" class="btn-logout">Déconnexion</a>
+        <a href="adminlogout.php" class="btn-logout">Déconnexion</a>
     </div>
 </aside>
 

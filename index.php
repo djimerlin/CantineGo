@@ -44,12 +44,19 @@ $menus = $stmt->fetchAll();
   <h1>🍽️ Menu de la semaine</h1>
   <p>Consultez les repas et réservez votre place à la cantine.</p>
   <?php if (!estConnecteEleve()): ?>
-    <a href="connexion.php" class="btn btn-orange">Se connecter pour réserver</a>
+    <a href="connect.php" class="btn btn-orange">Se connecter pour réserver</a>
   <?php endif; ?>
 </div>
 
 <div class="section">
-  <div class="titre-section">📅 Cette semaine</div>
+  <div class="titre-section" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <span>📅 Cette semaine</span>
+    <?php if (isset($_SESSION['id_eleve'])): ?>
+        <a href="reservation.php" class="btn" style="background: #e8a838; color: #fff; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+             Voir mes réservations
+        </a>
+    <?php endif; ?>
+  </div>
 
   <?php if (empty($menus)): ?>
     <p style="color:#999; text-align: center; padding: 2rem;">Aucun menu disponible cette semaine.</p>
@@ -58,7 +65,7 @@ $menus = $stmt->fetchAll();
         <?php foreach ($menus as $menu): ?>
             <div class="carte">
                 <div class="carte-header">
-                    <?= date('d/m/Y', strtotime($menu['date_menu'])) ?> - <?= htmlspecialchars($menu['plat_principal']) ?>
+                    <?= date('d/m/Y', strtotime($menu['date_menu'])) ?> - <?= htmlspecialchars($menu['plat_principal'] ?? '') ?>
                 </div>
                 
                 <?php if (!empty($menu['image'])): ?>
@@ -76,11 +83,13 @@ $menus = $stmt->fetchAll();
                         <?= number_format($menu['prix'], 0, ',', ' ') ?> FCFA
                     </div>
                     
-                    <?php if (estConnecteEleve()): ?>
-                        <a href="reservation.php?id=<?= $menu['id_menu'] ?>"
-                           class="btn btn-vert btn-full" style="margin-top:10px; display:block; text-align:center; text-decoration:none;">
-                            Réserver
+                    <?php if (isset($_SESSION['id_eleve'])): ?>
+                        <a href="reserver.php?id=<?= $menu['id_menu'] ?>"
+                           class="btn btn-vert btn-full" style="margin-top:10px; display:block; text-align:center; text-decoration:none; background: #2d6a4f; color: white; padding: 0.6rem; border-radius: 6px; font-weight: bold;">
+                           🛒 Réserver ce plat
                         </a>
+                    <?php else: ?>
+                        <p style="font-size: 0.8rem; color: #ff6b6b; margin-top: 10px; text-align: center;">Connectez-vous pour réserver</p>
                     <?php endif; ?>
                 </div>
             </div>
