@@ -35,10 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($check->fetch()) {
             $erreur = "Cette adresse e-mail est déjà utilisée.";
         } else {
-            // Insertion
-            $hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+            // Insertion sans hachage
             $stmt = $pdo->prepare("INSERT INTO eleve (nom, prenom, email, filiere, mot_de_passe) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$nom, $prenom, $email, $filiere, $hash]);
+            $stmt->execute([$nom, $prenom, $email, $filiere, $mot_de_passe]);
 
             // Connexion automatique après inscription
             $_SESSION['id_eleve']    = $pdo->lastInsertId();
