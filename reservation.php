@@ -13,6 +13,38 @@ if ($eleve) {
     $nom_complet = htmlspecialchars($eleve['prenom'] . ' ' . $eleve['nom']);
 }
 
+// ── ACTION 1 : TRAITER L'AJOUT D'UNE RÉSERVATION ──
+if (isset($_GET['id'])) {
+    $id_menu = intval($_GET['id']);
+
+    // Éviter les doublons : Vérifier si ce plat est déjà réservé par cet élève
+    $verif = $pdo->prepare("SELECT id_reservation FROM reservation WHERE id_eleve = ? AND id_menu = ?");
+    $verif->execute([$id_eleve, $id_menu]);
+    
+    if ($verif->fetch()) {
+        $erreur = "Vous avez déjà réservé ce plat !";
+    } else {
+        // On récupère l'id_repas associé à ce menu pour pouvoir remplir la colonne id_repas de ta table reservation
+        $stmtMenu = $pdo->prepare("SELECT id_repas FROM menu WHERE id_menu = ? LIMIT 1");
+        $stmtMenu->execute([$id_menu]);
+        $menuInfo = $stmtMenu->fetch(PDO::FETCH_ASSOC);
+
+        if ($menuInfo) {
+            $id_repas = $menuInfo['id_repas'];
+
+            // Insertion dans la table reservation (statut 'en attente' par défaut)
+            $ins = $pdo->prepare("INSERT INTO reservation (id_eleve, id_menu, id_repas, statut) VALUES (?, ?, ?, 'en attente')");
+            if ($ins->execute([$id_eleve, $id_menu, $id_repas])) {
+                $message = "🎉 Votre réservation a été enregistrée avec succès !";
+            } else {
+                $erreur = "Une erreur est survenue lors de la réservation.";
+            }
+        } else {
+            $erreur = "Ce menu n'existe pas.";
+        }
+    }
+}
+
 // ACTIONS : CONFIRMER / ANNULER
 $message      = '';
 $message_type = '';

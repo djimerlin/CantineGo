@@ -81,7 +81,7 @@ $menus = $stmt->fetchAll();
                     </div>
                     
                     <?php if (isset($_SESSION['id_eleve'])): ?>
-                        <a href="reserver.php?id=<?= $menu['id_menu'] ?>"
+                        <a href="reservation.php?id=<?= $menu['id_menu'] ?>"
                            class="btn btn-vert btn-full" style="margin-top:10px; display:block; text-align:center; text-decoration:none; background: #2d6a4f; color: white; padding: 0.6rem; border-radius: 6px; font-weight: bold;">
                            🛒 Réserver ce plat
                         </a>
