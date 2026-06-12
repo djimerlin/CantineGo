@@ -342,9 +342,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="email" id="email" name="email" placeholder="exemple@email.com" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required autofocus>
             </div>
             <div class="form-group">
-                <label for="mot_de_passe">Mot de passe</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="••••••••" required>
-            </div>
+                    <label>Mot de passe</label>
+                    <input type="password" name="mot_de_passe" placeholder="••••••••" required>
+                </div>
             <div class="lien-inscription">
                 Vous n'avez pas de compte ? <a href="iscrip.php">Inscrivez-vous ici</a>
             </div>
