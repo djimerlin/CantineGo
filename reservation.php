@@ -1,8 +1,8 @@
 <?php
-// ── CONNEXION via db.php partagé ──
+// CONNEXION via db.php partagé
 require_once 'db.php';
 
-// ── SESSION ÉLÈVE ──
+// SESSION ÉLEVe
 session_start();
 $id_eleve    = (int) ($_SESSION['id_eleve'] ?? 0);
 $nom_complet = '';
@@ -13,7 +13,7 @@ if ($eleve) {
     $nom_complet = htmlspecialchars($eleve['prenom'] . ' ' . $eleve['nom']);
 }
 
-// ── ACTIONS : CONFIRMER / ANNULER ──
+// ACTIONS : CONFIRMER / ANNULER
 $message      = '';
 $message_type = '';
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['id_
     }
 }
 
-// ── RÉCUPÉRATION DES RÉSERVATIONS ──
+// RÉCUPÉRATION DES RÉSERVATIONS
 $rows       = [];
 $par_periode = [];
 $total = $confirmees = $en_attente = $annulees = 0;
@@ -114,7 +114,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             --texte:         #2d3748;
             --texte-doux:    #6b7c6e;
 
-            /* Statuts */
+            
             --att-bg:  #FFF8E1; --att-txt: #e8a838;
             --ok-bg:   #e8f5ee; --ok-txt:  #2d6a4f;
             --ann-bg:  #FEE2E2; --ann-txt: #DC2626;
@@ -127,7 +127,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             min-height: 100vh;
         }
 
-        /* ── NAVBAR (identique index.php) ── */
+
         nav {
             background: var(--vert);
             padding: 0 2rem;
@@ -178,7 +178,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         }
         .nav-user a:hover { color: #fff; }
 
-        /* ── MAIN ── */
+       
         main {
             max-width: 1050px;
             margin: 2rem auto;
@@ -197,7 +197,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             margin-top: .3rem;
         }
 
-        /* ── STATS ── */
+        
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -217,7 +217,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         .stat-card .val { font-size: 1.9rem; font-weight: 700; color: var(--dark); line-height: 1; }
         .stat-card .lbl { font-size: .8rem; color: var(--texte-doux); margin-top: .3rem; }
 
-        /* ── FLASH ── */
+       
         .flash {
             padding: .85rem 1.2rem;
             border-radius: 8px;
@@ -233,7 +233,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         .flash.warning { background: var(--att-bg); color: var(--att-txt); border: 1px solid #fde68a; }
         .flash.info    { background: var(--vert-clair); color: var(--vert); border: 1px solid #b7dfc8; }
 
-        /* ── ALERTE NON CONNECTÉ ── */
+        
         .alert-login {
             background: #fff8e1;
             border: 1px solid var(--orange);
@@ -248,7 +248,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             text-decoration: underline;
         }
 
-        /* ── ÉTAT VIDE ── */
+        
         .empty {
             text-align: center;
             padding: 3rem;
@@ -273,7 +273,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         }
         .empty a:hover { background: var(--orange-hover); }
 
-        /* ── PÉRIODE ── */
+       
         .periode { margin-bottom: 2rem; }
         .periode-header {
             display: flex;
@@ -294,7 +294,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         }
         .periode-count { font-size: .8rem; color: var(--texte-doux); }
 
-        /* ── TABLEAU ── */
+       
         .table-wrap {
             background: #fff;
             border-radius: 10px;
@@ -316,7 +316,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         tbody tr:hover { background: #f0f7f3; }
         tbody td { padding: .8rem 1rem; font-size: .9rem; vertical-align: middle; }
 
-        /* ── BADGES ── */
+       
         .badge {
             display: inline-flex;
             align-items: center;
@@ -330,7 +330,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         .badge.confirme { background: var(--ok-bg);  color: var(--ok-txt); }
         .badge.annule   { background: var(--ann-bg); color: var(--ann-txt); }
 
-        /* ── BOUTONS ── */
+
         .actions { display: flex; gap: .5rem; flex-wrap: wrap; }
         .btn {
             padding: .35rem .9rem;
@@ -347,7 +347,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         .btn-annuler   { background: var(--ann-txt); color: #fff; }
         .btn-disabled  { background: var(--gris-bord); color: var(--texte-doux); cursor: not-allowed; }
 
-        /* ── FOOTER ── */
+
         footer {
             text-align: center;
             padding: 1.5rem;
@@ -357,7 +357,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             border-top: 1px solid var(--gris-bord);
         }
 
-        /* ── RESPONSIVE ── */
+        
         @media (max-width: 680px) {
             .stats { grid-template-columns: repeat(2, 1fr); }
             thead { display: none; }
@@ -386,7 +386,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
 </head>
 <body>
 
-<!-- NAVBAR -->
+
 <nav>
     <a href="index.php" class="nav-logo">Cantine<span>Go</span></a>
     <div class="nav-links">
@@ -396,11 +396,10 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
     <div class="nav-user">
         Bonjour, <strong><?= $nom_complet ?></strong>
         &nbsp;|&nbsp;
-        <a href="connect.php">Déconnexion</a>
     </div>
 </nav>
 
-<!-- MAIN -->
+
 <main>
 
     <div class="page-header">
@@ -408,7 +407,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
         <p>Retrouvez toutes vos réservations classées par semaine.</p>
     </div>
 
-    <!-- Stats -->
+   
         <div class="stats">
             <div class="stat-card">
                 <div class="val"><?= $total ?></div>
@@ -428,7 +427,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             </div>
         </div>
 
-        <!-- Flash -->
+
         <?php if ($message): ?>
             <div class="flash <?= $message_type ?>">
                 <?= ['success'=>'✅','error'=>'❌','warning'=>'⚠️','info'=>'ℹ️'][$message_type] ?? '' ?>
@@ -436,7 +435,7 @@ $annulees   = count(array_filter($rows, fn($r) => $r['statut'] === 'annulée'));
             </div>
         <?php endif; ?>
 
-        <!-- Contenu -->
+       
         <?php if (empty($par_periode)): ?>
             <div class="empty">
                 <div class="icon">🍽️</div>

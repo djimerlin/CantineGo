@@ -30,12 +30,12 @@ $menus = $stmt->fetchAll();
 <nav class="navbar">
   <span class="logo">Cantine<span>Go</span></span>
   <div>
-    <a href="index.php">Accueil</a>
+    <a href="reservation.php">Réservation</a>
     <?php if (estConnecteEleve()): ?>
       <a href="deconnexion.php">Déconnexion</a>
     <?php else: ?>
-      <a href="connect.php">Connexion</a>
-      <a href="iscrip.php">S'inscrire</a>
+      <a href="deconnexion.php">Déconnexion</a>
+     
     <?php endif; ?>
   </div>
 </nav>
@@ -43,9 +43,6 @@ $menus = $stmt->fetchAll();
 <div class="hero">
   <h1>🍽️ Menu de la semaine</h1>
   <p>Consultez les repas et réservez votre place à la cantine.</p>
-  <?php if (!estConnecteEleve()): ?>
-    <a href="connect.php" class="btn btn-orange">Se connecter pour réserver</a>
-  <?php endif; ?>
 </div>
 
 <div class="section">

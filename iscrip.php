@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flex-direction: column;
         }
 
-        /* ── NAVBAR ── */
+       
         nav {
             background: var(--vert);
             padding: 0 2rem;
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .nav-logo span { color: var(--orange); }
 
-        /* ── CENTRAGE ── */
+        
         .page-wrap {
             flex: 1;
             display: flex;
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 2rem 1rem;
         }
 
-        /* ── CARTE ── */
+      
         .card {
             background: #fff;
             border-radius: 14px;
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0 auto 1.8rem;
         }
 
-        /* ── GRILLE 2 COLONNES pour nom/prénom ── */
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         input::placeholder { color: #b2bdb8; }
 
-        /* Indicateur force mot de passe */
+       
         .force-wrap { margin-top: .4rem; display: none; }
         .force-barre {
             height: 4px;
@@ -211,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: .25rem;
         }
 
-        /* ── ERREUR ── */
+
         .erreur {
             background: var(--erreur-bg);
             color: var(--erreur-txt);
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             gap: .5rem;
         }
 
-        /* ── LIEN CONNEXION ── */
+        
         .lien-connexion {
             text-align: center;
             font-size: .84rem;
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .lien-connexion a:hover { text-decoration: underline; }
 
-        /* ── BOUTON ── */
+
         .btn-inscription {
             width: 100%;
             padding: .8rem;
@@ -257,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .btn-inscription:hover  { background: var(--vert-hover); }
         .btn-inscription:active { transform: scale(.98); }
 
-        /* ── FOOTER ── */
+       
         footer {
             text-align: center;
             padding: 1rem;
@@ -310,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <!-- Email -->
+            
             <div class="form-group">
                 <label for="email">Adresse e-mail</label>
                 <input type="email" id="email" name="email"

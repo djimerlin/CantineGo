@@ -16,7 +16,7 @@ $etape_connexion_admin = false; // Passe à true quand la clé unique est correc
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $etape = $_POST['etape'] ?? '';
 
-    // ── ÉTAPE 1 : Vérification de la clé unique dans la BDD ──
+    //  ETAPE 1 : Vérification de la clé unique dans la BDD
     if ($etape === 'verif_cle') {
         $cle_saisie = trim($_POST['cle_admin'] ?? '');
 
@@ -389,7 +389,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" name="mot_de_passe" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="btn-connexion" style="background: var(--vert);">Se connecter</button>
-                <a href="connexion.php" style="display:block; text-align:center; font-size:.8rem; margin-top:.8rem; color:var(--texte-doux); text-decoration:none;">Annuler</a>
+                <a href="connect.php" style="display:block; text-align:center; font-size:.8rem; margin-top:.8rem; color:var(--texte-doux); text-decoration:none;">Annuler</a>
             </form>
         </div>
         <?php endif; ?>
